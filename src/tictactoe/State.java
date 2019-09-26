@@ -2,7 +2,7 @@ package tictactoe;
 
 public class State {
 	int value;
-	int N = 3;
+	int N = 20;
 	int a[][] = new int[N][N];
 	
 	void Print(){

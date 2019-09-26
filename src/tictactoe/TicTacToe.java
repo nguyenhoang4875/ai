@@ -119,7 +119,7 @@ public class TicTacToe {
 	}
 
 	private boolean MyTurn(State s) {
-		int count=0;;
+	int count=0;
 		for (int i=0;i<s.N;i++)
 			for (int j=0;j<s.N;j++){
 				if (s.a[i][j]==0) count++;
