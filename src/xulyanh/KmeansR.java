@@ -2,78 +2,92 @@ package xulyanh;
 
 import java.util.Random;
 
-public class k_means {
-
+//Step 1
+// Init data to group.
+//Step 2-4
+//Count is number elements of a group
+// Sum coordinate of all group
+// Random one point for a group empty point
+// Step 3
+// Step 4
+// Chia
+// Calculator distance.
+public class KmeansR {
     public static void main(String[] args) {
         int[][] x = new int[][]{{3, 1}, {0, 3}, {1, 4}, {4, 1}};
 
-        k_means km = new k_means(x, 2);
+        Kmeans km = new Kmeans(x, 2);
         for (int i = 0; i < x.length; i++) {
             System.out.println(km.id[i]);
         }
     }
 
+
+
     int[][] data;
     int k;
-    int id[];
+    int[] id;
     int[][] c;
-    Random rand = new Random();
 
-    public k_means(int[][] data, int k) {
+    public KmeansR(int[][] data, int k) {
         this.data = data;
         this.k = k;
         this.id = new int[data.length];
         this.c = new int[k][data[0].length];
+        Random random = new Random();
 
-        // Buoc 1
-        for (int i = 0; i < data.length; i++)
-            id[i] = rand.nextInt(k);
 
-        // Buoc 2-4
+        //Step 1
+        // Init data to group.
+        for (int i = 0; i < data.length; i++) {
+            id[i] = random.nextInt(k);
+        }
+
+
         while (true) {
-            // Buoc 2
-            // count is number element of a group
+            // step 2
+            //Count is number elements of a group
             int[] count = new int[k];
             for (int i = 0; i < k; i++) {
                 count[i] = 0;
-                for (int j = 0; j < c[i].length; j++)
+                for (int j = 0; j < c[i].length; j++) {
                     c[i][j] = 0;
-
-            }
-            // sum coordinate of all group
-            for (int i = 0; i < data.length; i++) {
-                count[id[i]]++;
-                // sum coordinate of a group
-                for (int j = 0; j < data[i].length; j++)
-                    c[id[i]][j] += data[i][j];
-            }
-
-            for (int i = 0; i < k; i++) {
-                if (count[i] != 0) {
-                    for (int j = 0; j < c[i].length; j++)
-                        c[i][j] /= count[i];
-                } else {
-                    // random one point for a group empty point.
-                    int x = rand.nextInt(data.length);
-                    for (int j = 0; j < c[i].length; j++)
-                        c[i][j] = data[x][j];
                 }
             }
-
-            // Buoc 3
-            boolean thaydoi = false;
+            // Sum coordinate of all group
+            for (int i = 0; i < data.length; i++) {
+                count[id[i]]++;
+                for (int j = 0; j < data[i].length; j++) {
+                    c[id[i]][j] += data[i][j];
+                }
+            }
+            for (int i = 0; i < k; i++) {
+                if (count[i] != 0) {
+                    for (int j = 0; j < c[i].length; j++) {
+                        c[i][j] /= count[i];
+                    }
+                } else {
+                    int x = random.nextInt(k);
+                    for (int j = 0; j < c[i].length; j++) {
+                        c[i][j] = data[x][j];
+                    }
+                }
+            }
+            //Step 3
+            boolean change = false;
             for (int i = 0; i < data.length; i++) {
                 int newid = Chia(data[i]);
-                if (id[i] != newid)
-                    thaydoi = true;
+                if (id[i] != newid) {
+                    change = true;
+                }
+
                 id[i] = newid;
             }
-            // Buoc 4
-            if (!thaydoi) {
+            // Step 4
+            if (!change) {
                 break;
             }
         }
-
     }
 
     public int Chia(int[] x) {
@@ -89,12 +103,13 @@ public class k_means {
         return id;
     }
 
-    // dis is distance point to focus in a group
-    private int dis(int[] x, int[] y) {
+    public int dis(int[] x, int[] y) {
+
         int dis = 0;
-        for (int i = 0; i < x.length; i++)
-            dis += (x[i] - y[i]) * (x[i] - y[i]);
+        for (int i = 0; i < x.length; i++) {
+            dis += (x[i] - y[i]) *(x[i] - y[i]);
+
+        }
         return dis;
     }
-
 }

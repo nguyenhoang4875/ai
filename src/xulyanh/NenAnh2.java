@@ -17,7 +17,7 @@ public class NenAnh2 extends JFrame {
 
 	public NenAnh2() {
 		try {
-			img = ImageIO.read(new File("C:\\test3.jpg"));
+			img = ImageIO.read(new File("/home/hoang/Pictures/lamp_outlet_idea_electricity_120422_1920x1080.jpg"));
 		} catch (Exception e) {
 
 		}
@@ -35,7 +35,7 @@ public class NenAnh2 extends JFrame {
 			}
 		
 		
-		this.setTitle("Nen Anh");
+		this.setTitle("Nen Anh 2");
 		this.setSize(img.getWidth(), img.getHeight());
 		
 		this.setDefaultCloseOperation(3);

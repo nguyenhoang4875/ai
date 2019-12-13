@@ -1,23 +1,22 @@
 package xulyanh;
 
-import java.awt.Graphics;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.JFrame;
-
-public class NenAnh extends JFrame {
+public class NenAnhR extends JFrame {
 
 	public static void main(String[] args) {
-		new NenAnh();
+		new NenAnhR();
 	}
 
 	BufferedImage img;
 
-	public NenAnh() {
+	public NenAnhR() {
 		try {
 			img = ImageIO.read(new File("/home/hoang/Pictures/lamp_outlet_idea_electricity_120422_1920x1080.jpg"));
 		} catch (Exception e) {
@@ -40,7 +39,7 @@ public class NenAnh extends JFrame {
 		for (int i=0;i<id;i++)
 			data[i]=ld.get(i);
 		
-		KmeansR km = new KmeansR(data,10);
+		Kmeans km = new Kmeans(data,10);
 		
 		int i = 0;
 		for (int y = 0; y<img.getHeight();y++)
@@ -59,7 +58,7 @@ public class NenAnh extends JFrame {
 				i++;
 			}
 		
-		this.setTitle("Nen Anh");
+		this.setTitle("Nen Anh Repetition");
 		this.setSize(img.getWidth(), img.getHeight());
 		
 		this.setDefaultCloseOperation(3);
